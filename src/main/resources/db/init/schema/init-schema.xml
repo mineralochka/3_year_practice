@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet id="1.0" author="r.goroshko">
+        <createTable tableName="calculation">
+            <column name="id" type="bigint" remarks="Идентификатор записи">
+                <constraints nullable="false"/>
+            </column>
+            <column name="input" type="varchar" remarks="Входное выражение"/>
+            <column name="result" type="varchar" remarks="Результат вычисления">
+                <constraints nullable="false"/>
+            </column>
+            <column name="timestamp" type="timestamp with time zone" remarks="Время поступления запроса">
+                <constraints nullable="false"/>
+            </column>
+            <column name="session_id" type="varchar(36)" remarks="Идентификатор сессии">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="calculation_seq"/>
+        <addPrimaryKey tableName="calculation" columnNames="id"/>
+        <!--<addForeignKeyConstraint baseTableName="calculation" baseColumnNames="session_id"-->
+                                 <!--constraintName="fk_calculation_session_id"-->
+                                 <!--referencedTableName="spring_session"-->
+                                 <!--referencedColumnNames="session_id"/>-->
+    </changeSet>
+</databaseChangeLog>
